@@ -18,7 +18,6 @@ layers:
       - ["mute", "cmd-t", "cmd-e"]
       - ["escape", "cmd-w", "cmd-d"]
     knobs:
-      - cw: "volumedown"
+      - cw: "volumeup"
         press: "mute"
-        ccw: "volumeup"
-
+        ccw: "volumedown"

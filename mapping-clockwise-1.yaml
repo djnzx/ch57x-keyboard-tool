@@ -1,22 +1,32 @@
-# knob at the bottom
-orientation: clockwise
+orientation: normal
 
-rows: 3
-columns: 2
+rows: 2
+columns: 3
 knobs: 1
 
 # we define values as if knob on the right
 
 # cmd-t - safari - new tab
 # cmd-w - safari - close tab
-# cmd-d - google meet - mute microphone
-# cmd-e - google meet - mute camera
 
 # layer 1
+# cmd-d - google meet - mute microphone
+# cmd-e - google meet - mute camera
 layers:
   - buttons:
       - ["mute", "cmd-t", "cmd-e"]
       - ["escape", "cmd-w", "cmd-d"]
+    knobs:
+      - cw: "volumeup"
+        press: "mute"
+        ccw: "volumedown"
+
+# layer 2
+# cmd-shift-a - zoom - mute microphone
+# cmd-shift-v - zoom - mute camera
+  - buttons:
+      - ["mute", "cmd-t", "cmd-shift-v"]
+      - ["escape", "cmd-w", "cmd-shift-a"]
     knobs:
       - cw: "volumeup"
         press: "mute"

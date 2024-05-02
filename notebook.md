@@ -19,6 +19,17 @@ Product ID: 0x8840 = 34880
  Vendor ID: 0x1189 = 4489 (Trisat Industrial Co., Ltd.)
 ```
 
+### explore dependencies
+```shell
+cargo install cargo-tree
+cargo-tree tree
+```
+
+### build & install
+```shell
+cargo install ch57x-keyboard-tool
+```
+
 ### validate
 ```shell
 ch57x-keyboard-tool validate < mapping-clockwise-1.yaml

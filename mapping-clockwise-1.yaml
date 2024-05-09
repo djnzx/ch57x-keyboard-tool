@@ -10,8 +10,8 @@ knobs: 1
 # cmd-w - safari - close tab
 
 # layer 1
-# cmd-d - google meet - mute microphone
-# cmd-e - google meet - mute camera
+# google meet - mute microphone - cmd-d
+# google meet - mute camera - cmd-e
 layers:
   - buttons:
       - ["mute", "cmd-t", "cmd-e"]
@@ -22,11 +22,22 @@ layers:
         ccw: "volumedown"
 
 # layer 2
-# cmd-shift-a - zoom - mute microphone
-# cmd-shift-v - zoom - mute camera
+# zoom - mute microphone - cmd-shift-a
+# zoom - mute camera     - cmd-shift-v
   - buttons:
       - ["mute", "cmd-t", "cmd-shift-v"]
       - ["escape", "cmd-w", "cmd-shift-a"]
+    knobs:
+      - cw: "volumeup"
+        press: "mute"
+        ccw: "volumedown"
+
+# layer 3
+# teams - mute microphone - cmd-shift-m
+# teams - mute camera     - cmd-shift-o
+  - buttons:
+      - ["mute", "cmd-t", "cmd-shift-o"]
+      - ["escape", "cmd-w", "cmd-shift-m"]
     knobs:
       - cw: "volumeup"
         press: "mute"

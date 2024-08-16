@@ -1,5 +1,5 @@
-# knob at the right
-orientation: normal
+# knob at the top
+orientation: counterclockwise
 
 # knob at the right
 rows: 2
@@ -7,30 +7,33 @@ columns: 3
 knobs: 1
 
 # we define values as if knob on the right
-# layer 1:
+# layer 0:
 layers:
   - buttons:
-      - ["a", "b", "c"]
-      - ["d", "e", "f"]
+      - ["a", "b"]
+      - ["c", "d"]
+      - ["e", "f"]
     knobs:
       - cw: "1"
         press: "3"
         ccw: "2"
 
-# layer 2
+# layer 1
   - buttons:
-      - ["g", "h", "i"]
-      - ["j", "k", "l"]
+      - ["g", "h"]
+      - ["i", "j"]
+      - ["k", "l"]
     knobs:
       - cw: "4"
         press: "6"
         ccw: "5"
 
-# layer 3
+# layer 2
   - buttons:
-      - ["m", "n", "o"]
-      - ["p", "q", "r"]
+      - ["m", "n"]
+      - ["o", "p"]
+      - ["q", "r"]
     knobs:
-      - cw: "volumeup" # whatever you config, doesn't work, cv is always = "3"
-        press: "9"
-        ccw: "8"
+      - cw: "7" # whatever you config, doesn't work, cw is always = "3"
+        press: "8"
+        ccw: "9"

@@ -4,10 +4,12 @@ mod keyboard;
 mod options;
 mod parse;
 
+use std::io::{BufReader, Read, StdinLock};
+
 use crate::config::Config;
 use crate::consts::PRODUCT_IDS;
 use crate::keyboard::{
-    k884x, k8880, Keyboard, KnobAction, MediaCode, Modifier, MouseAction, MouseButton,
+    k884x, k8890, Keyboard, KnobAction, MediaCode, Modifier, MouseAction, MouseButton,
     WellKnownCode,
 };
 use crate::options::{Command, LedCommand};
@@ -17,6 +19,7 @@ use anyhow::{anyhow, ensure, Result};
 use indoc::indoc;
 use itertools::Itertools;
 use log::debug;
+use options::UploadCommand;
 use rusb::{Context, Device, DeviceDescriptor, TransferType};
 
 use anyhow::Context as _;
@@ -68,9 +71,22 @@ fn main() -> Result<()> {
             println!("config is valid 👌")
         }
 
-        Command::Upload => {
+        Command::Upload(UploadCommand { ref config_path }) => {
             // Load and validate mapping.
-            let config: Config = serde_yaml::from_reader(std::io::stdin().lock())
+            let mut stdin_reader: BufReader<StdinLock<'static>>;
+            let mut file_reader: BufReader<std::fs::File>;
+            let reader: &mut dyn Read = match config_path {
+                Some(path) => {
+                    let file = std::fs::File::open(&path).context("open config file")?;
+                    file_reader = BufReader::new(file);
+                    &mut file_reader
+                }
+                None => {
+                    stdin_reader = BufReader::new(std::io::stdin().lock());
+                    &mut stdin_reader
+                }
+            };
+            let config: Config = serde_yaml::from_reader(reader)
                 .context("load mapping config")?;
             let layers = config.render().context("render mapping config")?;
 
@@ -174,11 +190,17 @@ fn open_keyboard(options: &Options) -> Result<Box<dyn Keyboard>> {
         "only one device configuration is expected"
     );
 
+    let preferred_endpint = match id_product {
+        0x8840 | 0x8842 => k884x::Keyboard884x::preferred_endpoint(),
+        0x8890 => k8890::Keyboard8890::preferred_endpoint(),
+        _ => unreachable!("unsupported device"),
+    };
+
     // Find correct endpoint
     let (intf_num, endpt_addr) = find_interface_and_endpoint(
         &device,
         options.devel_options.interface_number,
-        options.devel_options.endpoint_address,
+        options.devel_options.endpoint_address.unwrap_or(preferred_endpint),
     )?;
 
     // Open device.
@@ -193,9 +215,9 @@ fn open_keyboard(options: &Options) -> Result<Box<dyn Keyboard>> {
             k884x::Keyboard884x::new(handle, endpt_addr).map(|v| Box::new(v) as Box<dyn Keyboard>)
         }
         0x8890 => {
-            k8880::Keyboard8890::new(handle, endpt_addr).map(|v| Box::new(v) as Box<dyn Keyboard>)
+            k8890::Keyboard8890::new(handle, endpt_addr).map(|v| Box::new(v) as Box<dyn Keyboard>)
         }
-        _ => unreachable!("This shouldn't happen!"),
+        _ => unreachable!("unsupported device"),
     }
 }
 

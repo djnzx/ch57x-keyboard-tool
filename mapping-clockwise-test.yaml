@@ -34,6 +34,6 @@ layers:
       - ["o", "p"]
       - ["q", "r"]
     knobs:
-      - cw: "7" # whatever you config, doesn't work, cw is always = "3"
-        press: "8"
-        ccw: "9"
+      - cw: "q" # whatever you config, doesn't work, cw is always = "3"
+        press: "w"
+        ccw: "e"

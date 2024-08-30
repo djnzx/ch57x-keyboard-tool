@@ -43,4 +43,10 @@ ch57x-keyboard-tool validate < mapping-clockwise-test.yaml
 sudo ch57x-keyboard-tool upload < mapping-clockwise-1.yaml
 sudo ch57x-keyboard-tool upload < mapping-clockwise-test.yaml
 sudo ch57x-keyboard-tool --vendor-id 4489 --product-id 34880 upload < mapping-clockwise-1.yaml
+sudo ch57x-keyboard-tool --vendor-id 4489 --product-id 34880 upload < mapping-clockwise-test.yaml
+```
+
+### debug
+```shell
+sudo RUST_LOG=ch57x_keyboard_tool=debug target/debug/ch57x-keyboard-tool --vendor-id 4489 --product-id 34880 upload < mapping-clockwise-test.yaml
 ```

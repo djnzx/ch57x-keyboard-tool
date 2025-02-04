@@ -1,0 +1,22 @@
+orientation: normal
+
+rows: 2
+columns: 3
+knobs: 1
+
+# we define values as if knob on the right
+
+# cmd-t - safari - new tab
+# cmd-w - safari - close tab
+
+layers:
+  # layer 1
+# teams - mute microphone - cmd-shift-m
+# teams - mute camera     - cmd-shift-o
+  - buttons:
+      - ["mute", "cmd-t", "cmd-shift-o"]
+      - ["escape", "cmd-w", "cmd-shift-m"]
+    knobs:
+      - cw: "volumeup"
+        press: "mute"
+        ccw: "volumedown"

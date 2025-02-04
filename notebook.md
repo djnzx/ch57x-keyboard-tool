@@ -35,6 +35,7 @@ cargo install ch57x-keyboard-tool
 ### validate
 ```shell
 ch57x-keyboard-tool validate < mapping-clockwise-1.yaml
+ch57x-keyboard-tool validate < mapping-clockwise-1-teams.yaml
 ch57x-keyboard-tool validate < mapping-clockwise-test.yaml
 ```
 
@@ -43,6 +44,7 @@ ch57x-keyboard-tool validate < mapping-clockwise-test.yaml
 sudo ch57x-keyboard-tool upload < mapping-clockwise-1.yaml
 sudo ch57x-keyboard-tool upload < mapping-clockwise-test.yaml
 sudo ch57x-keyboard-tool --vendor-id 4489 --product-id 34880 upload < mapping-clockwise-1.yaml
+sudo ch57x-keyboard-tool --vendor-id 4489 --product-id 34880 upload < mapping-clockwise-1-teams.yaml
 sudo ch57x-keyboard-tool --vendor-id 4489 --product-id 34880 upload < mapping-clockwise-test.yaml
 ```
 
